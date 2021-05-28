@@ -1,0 +1,25 @@
+exeファイルの作り方
+
+1.VSCでプロジェクトをエクスポートし、jarファイルを作成する。
+
+2.コマンドプロンプトを開き、jarファイルがある階層に移動する。
+
+3.Jlinkを用いてモジュールが含まれるJREを作成する。
+jlink --compress=2 --module-path "C:\Program Files\Java\jdk-14.0.2\jmods;C:\Program Files\Java\javafx-jmods-11.0.2"
+ --add-modules java.base,javafx.base,javafx.controls,javafx.fxml,javafx.graphics --output jre-FPS
+(module-pathは、JDKの場所、JavaFXのjmodsの場所を指定すること。outputは、名前の変更が可能)
+
+4.jre-FPS\bin\java -jar FloorPlanSimulator.jarを実行し、動作確認をする。
+
+5.exewrapを同じ階層に置き、exeを生成する。
+exewrap -g FloorPlanSimulator.jar
+
+
+
+
+/*コマンドプロンプトでのコンパイル*/
+javac --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml -encoding UTF-8 App.java
+/*classファイルを生成するコマンド*/
+java --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml App
+/*jarファイルを生成するコマンド*/
+java --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml -jar FloorPlanSimulator.jar
